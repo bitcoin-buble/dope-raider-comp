@@ -2,6 +2,18 @@ import React, { Component } from "react";
 import axios from "axios";
 import logo from "./logo.svg";
 import "./App.css";
+import narcoABI from "./narcoABI";
+
+import Web3 from "web3";
+import { NarcoStateWatch } from "./narcoStateWatch";
+
+// const swarmAddress =
+//   "bzzr://c40194589c043fa7eca88783a69dbb2941294b75280945bb6df3cb9eb";
+
+// const web3 = new Web3(Web3.givenProvider);
+// const narcoContractAddress = "0x11c4469d974f8af5ba9ec99f3c42c07c848c861c";
+
+// const narcoContract = web3.eth.contract(narcoABI).at(narcoContractAddress);
 
 const accounts = [
   {
@@ -54,7 +66,7 @@ const Contestant = ({ panelMember, raider, address }) => (
   <div>
     <div>{panelMember}</div>
     <div>{raider}</div>
-    <POAValue address={address} />
+    {/* <POAValue address={address} /> */}
     <div>
       <a href={`https://poaexplorer.com/api/balance/${address}`}>Account</a>
     </div>
@@ -70,9 +82,10 @@ class App extends Component {
         </header>
         <ul>
           {accounts.map(props => (
-            <Contestant {...props} />
+            <Contestant key={props.address} {...props} />
           ))}
         </ul>
+        <NarcoStateWatch />
       </div>
     );
   }
